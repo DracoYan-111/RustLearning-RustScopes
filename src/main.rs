@@ -40,6 +40,15 @@ fn main() {
     makes_copy(f1);//i32类型copy副本到makes_copy方法里
 
     println!("{}", f1);//f1仍然有效
+
+    //---------------------
+
+    let j = gives_ownership();//j得到gives_ownership的返回值some_string，所有权将转移给j
+
+    let j1 = String::from("hello");//j1进入作用域
+
+    let j2 = takes_and_gives_back(j1);//takes_and_gives_back方法的返回值被移动到j2上
+
 }//a作用域结束，a不再可用
 
 fn take_ownership(some_string: String) {
@@ -48,4 +57,15 @@ fn take_ownership(some_string: String) {
 
 fn makes_copy(some_number: i32) {
     println!("{}", some_number);
+}
+
+//=============================
+
+fn gives_ownership() -> String {
+    let some_string = String::from("hello");
+    some_string//返回值所有权移动
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string//j1所有权被移动到该函数里
 }
