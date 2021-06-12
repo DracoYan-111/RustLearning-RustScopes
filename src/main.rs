@@ -16,4 +16,9 @@ fn main() {
     let c1 = c;
     println!("{}", c);//此时c将不再可用
 
+    //---------------------
+    let d: String = String::from("hello");
+    //clone:对其他变量进行拷贝
+    let d1 = d.clone();
+    println!("{},{}", d, d1);//d:hello,d1:hello,两个变量都可用，d的变量未发生移动
 }//a作用域结束，a不再可用
