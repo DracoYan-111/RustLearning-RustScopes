@@ -37,14 +37,19 @@ fn main() {
     println!("{}", f1);//f1仍然有效
 
     //=================返回值与作用域=================
-    let j = gives_ownership();//j得到gives_ownership的返回值some_string，所有权将转移给j
-    let j1 = String::from("hello");//j1进入作用域
-    let j2 = takes_and_gives_back(j1);//takes_and_gives_back方法的返回值被移动到j2上
+    let g = gives_ownership();//g得到gives_ownership的返回值some_string，所有权将转移给g
+    let g1 = String::from("hello");//g1进入作用域
+    let g2 = takes_and_gives_back(g1);//takes_and_gives_back方法的返回值被移动到g2上
 
     //=================函数使用某值，但不获得其所有权=================
-    let k = String::foem("hello");//k进入作用域
-    let (k2, len) = calculate_length(k);//将k传入calculate_length方法
-    println!("{},{}", k2, len);//k2==于k
+    let h = String::foem("hello");//h进入作用域
+    let (h2, len) = calculate_length(h);//将h传入calculate_length方法
+    println!("{},{}", h2, len);//h2==于h
+
+    //=================引用和借用=================
+    let i = String::from("hello");//i进入作用域
+    let lenTwo = calculate_lengthTwo(&i);//把i的引用作为参数传给calculate_lengthTwo方法
+    println!("{},{}", i, lenTwo);//i仍然可以使用
 }//a作用域结束，a不再可用
 
 //=================所有权与函数=================
@@ -70,4 +75,9 @@ fn takes_and_gives_back(a_string: String) -> String {
 fn calculate_length(s: String) -> (String, usize) {
     let length = s.len;//获取到传入字符串的长度
     (s, length)//将s原封不动的返回和字符长度
+}
+
+//=================引用和借用=================
+fn calculate_lengthTwo(s: &String) -> usize {//String类型的引用
+    s.len()
 }
