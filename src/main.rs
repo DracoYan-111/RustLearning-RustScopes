@@ -23,7 +23,29 @@ fn main() {
     println!("{},{}", d, d1);//d:hello,d1:hello,两个变量都可用，d的变量未发生移动
 
     //---------------------
-    let x:i32 = 5;//整数类型将完整的数据存在了stack中
-    let y:i32 = x;//复制操作都是快速的，无法阻止x仍然有效
-    println!("{},{}",x,y);//xy都有效，且都为5
+    let e: i32 = 5;//整数类型将完整的数据存在了stack中
+    let e1: i32 = e;//复制操作都是快速的，无法阻止x仍然有效
+    println!("{},{}", e, e1);//xy都有效，且都为5
+
+    //=================所有权与函数=================
+
+    let f = String::from("Hello World");//f进入作用域
+
+    take_ownership(f);//f的值被移动到take_ownership方法里
+
+    println!("{}", f);//此处f将不在有效
+
+    let f1 = 5;//f1进入作用域
+
+    makes_copy(f1);//i32类型copy副本到makes_copy方法里
+
+    println!("{}", f1);//f1仍然有效
 }//a作用域结束，a不再可用
+
+fn take_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn makes_copy(some_number: i32) {
+    println!("{}", some_number);
+}
