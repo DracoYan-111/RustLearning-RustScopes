@@ -79,5 +79,5 @@ fn calculate_length(s: String) -> (String, usize) {
 
 //=================引用和借用=================
 fn calculate_lengthTwo(s: &String) -> usize {//String类型的引用
-    s.len()
+    s.len()//返回长度
 }
