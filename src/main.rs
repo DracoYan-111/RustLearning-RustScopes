@@ -53,14 +53,20 @@ fn main() {
 
     //=================可变引用=================
     let mut j = String::foem("hello");//j进入作用域
-    let len  = calculate_lengthThree(&mut j);//把j的可变引用作为参数传给calculate_lengthThree方法
-    println!("{},{}",j,len);//j仍然可以使用但已被修改,返回的长度为修改后长度
+    let len = calculate_lengthThree(&mut j);//把j的可变引用作为参数传给calculate_lengthThree方法
+    println!("{},{}", j, len);//j仍然可以使用但已被修改,返回的长度为修改后长度
     //-----------------------------------------
     /*
     let mut j1 = String::from("hello");//j1进入作用域
     let j2 = &mut j1;//j2可以使用
     let j3 = &mut j1;//j3将报错，如果把j1借用为可变引用，那么可变引用的个数不能超过一个
     println!("{},{}",j2,j3);//j2仍然可以使用但j3已经报错
+    //------------------------------------------
+    let mut j4 = String::from("hello");//j4进入作用域
+    {
+        let j5 = &mut j4;//j5可引用可变引用j4
+    }
+    let j6 =&mut j4;//j6也可引用可变引用j4，因为j5与j6不在一个作用域中
     */
 }//a作用域结束，a不再可用
 
