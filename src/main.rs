@@ -50,6 +50,12 @@ fn main() {
     let i = String::from("hello");//i进入作用域
     let lenTwo = calculate_lengthTwo(&i);//把i的引用作为参数传给calculate_lengthTwo方法
     println!("{},{}", i, lenTwo);//i仍然可以使用
+
+    //=================可变引用=================
+    let mut j = String::foem("hello");//j进入作用域
+    let len  = calculate_lengthThree(&mut j);//把j的可变引用作为参数传给calculate_lengthThree方法
+    println!("{},{}",j,len);//j仍然可以使用但已被修改,返回的长度为修改后长度
+
 }//a作用域结束，a不再可用
 
 //=================所有权与函数=================
@@ -79,5 +85,14 @@ fn calculate_length(s: String) -> (String, usize) {
 
 //=================引用和借用=================
 fn calculate_lengthTwo(s: &String) -> usize {//String类型的引用
+    //---------------------
+    //s.push_str(",world");不可以修改接用，不可以把s借用的变量当成可变的
+    s.len()//返回长度
+}
+
+//=================可变的引用=================
+fn calculate_lengthThree(s: &mut String) -> usize {//可变的 String类型的引用
+    //---------------------
+    s.push_str(",world");//可以修改接用，可以把s可变借用的变量当成可变的
     s.len()//返回长度
 }
